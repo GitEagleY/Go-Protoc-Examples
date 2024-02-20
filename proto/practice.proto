@@ -1,0 +1,37 @@
+// Define the syntax version for Protocol Buffers
+syntax = "proto3";
+package pak;
+
+option go_package = "/proto";
+// Enum representing some values
+message SomeEnum {
+  enum Value {
+    A = 0;
+    B = 1;
+    C = 3;
+  }
+}
+
+// Message representing nested fields
+message ToNest {
+  int64 newField = 1;
+  SomeEnum coolEnum = 2;
+}
+
+// Message representing the request
+message AReq {
+  bool G = 1;
+  ToNest K = 2;
+  SomeEnum alsoEnum = 3;
+}
+
+// Message representing the response
+message BResp {
+  bool R = 1;
+}
+
+// Service definition
+service MyService {
+  // RPC method that takes AReq and returns BResp
+  rpc Message(AReq) returns (BResp);
+}
